@@ -1,3 +1,12 @@
+/*
+
+Programa Realizado por : Josue Sauca
+						Ricardo Castro"
+Segundo Ciclo Paralelo 'B'
+Fecha : 19/11/2020
+
+*/
+package main;
 
 import java.util.Scanner;
 
@@ -8,6 +17,7 @@ public class validarCedula {
         Scanner scanner = new Scanner(System.in);
         char repetirPrograma;
         int cedulaTransformada[];
+        int validacionIndice = 0;
         try{
             do{
 
@@ -24,10 +34,15 @@ public class validarCedula {
                 arregloCopia = validarIndice(arregloCopia);
 
                 int sumaArreglo = sumaArray(arregloCopia);
-
-                int sacarDecenaSuperior = (10 - sumaArreglo%10) + sumaArreglo;
-                int validacionIndice = sacarDecenaSuperior - sumaArreglo;
-
+                
+                if(sumaArreglo%10==0){
+                    int sacarDecenaSuperior = ((sumaArreglo%10)) + sumaArreglo;
+                    validacionIndice = sacarDecenaSuperior - sumaArreglo;
+                }else{                    
+                    int sacarDecenaSuperior = (10 - (sumaArreglo%10)) + sumaArreglo;
+                    validacionIndice = sacarDecenaSuperior - sumaArreglo;
+                }
+                
                 validarCedula(cedulaTransformada,validacionIndice,codigoProvincia);
 
                 System.out.print("\n\nPulse (C) para cancelar el programa,pulse cualquier otra letra para seguir : ");
@@ -94,7 +109,7 @@ public class validarCedula {
             System.out.println("\nSu cedula es valida y pertenece a un ciudadano extranjero");
             
         }else{
-            if((cedula[9] == validacionIndice) && (codigoPrivincia < 25)){
+            if((cedula[9] == validacionIndice) && (codigoPrivincia < 25 && codigoPrivincia > 0)){
                 System.out.println("\nSu cedula es valida");
             }else{
                 System.out.println("\nSu cedula no es valida");
