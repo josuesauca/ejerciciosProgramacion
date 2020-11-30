@@ -41,10 +41,10 @@ public class main {
     }
     public static void imprimir(int[][] c){
     for (int i=0;i<c.length;i++){
-    for(int j=0;j<c.length;j++){
-    System.out.print(c[i][j] + "\t");
-    }
-    System.out.println();
+      for(int j=0;j<c.length;j++){
+        System.out.print(c[i][j] + "\t");
+      }
+      System.out.println();
     }
   }
 }
