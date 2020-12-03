@@ -178,7 +178,7 @@
 
             }
 
-            if(ultimoDig ==  resta && codigo > 24){
+            if(ultimoDig ==  resta8/* && codigo > 24*/){
                 verificar = true;
             }else{
                 verificar = false;
