@@ -6,8 +6,6 @@ Segundo Ciclo Paralelo 'B'
 Fecha : 19/11/2020
 
 */
-package main;
-
 import java.util.Scanner;
 
 public class validarCedula {
