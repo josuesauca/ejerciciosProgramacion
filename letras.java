@@ -21,32 +21,20 @@ public class letras{
 		var letra =  scanner.next().charAt(0);
 
 		for (char i = 'a';i<=letra;++i) {
-
 			for (int j = 0;j<filas ;++j ) {
-
-				if(j==0){
-					System.out.print(i);
-				}
-
-				if(j==filas-1){
-					System.out.print(i);
-
-				}
-
 				for (int k = 0;k<columnas;++k) {
-					if(k==0){
+					if(j==0||j==filas-1){
 						System.out.print(i);
-					}
-					if(k==columnas-1){
-						System.out.print(i);
-					}
-					
+					}else{
+						if( k==0  || k==columnas-1){
+							System.out.print(i);
+						}else{
+							System.out.print(" ");
+						}
+					}					
 				}
-
 				System.out.println("");
-				
-			}
-			
+			}			
 		}
 	}
 }
