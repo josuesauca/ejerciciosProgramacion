@@ -1,214 +1,292 @@
+/**
+ * Autor : Josue Sauca
+ * Fecha : 13/12/2020
+ */
 package main;
 
-import persona.*;
-
 import java.util.ArrayList;
-import java.util.*;
+import java.util.Scanner;
+import java.util.GregorianCalendar;
+import clase_empleado.Empleado;
+import profesionales.prefesionales_area_medica.Enfermera;
+import profesionales.prefesionales_area_medica.Medico;
+import profesionales.prefesionales_area_no_medica.Conductor;
+import profesionales.prefesionales_area_no_medica.Secretaria;
 
 public class Main {
 
     public static void main(String[] args) {
-//        Empleado empleado1 = new Empleado();
-//        System.out.println(empleado1.getSalario());
-//        empleado1.setNombre("Pedro");
-//
-//        Empleado empleado2 = new Empleado();
-//        System.out.println(empleado2.getSalario());
-//        System.out.println(empleado2.getNombre());
-//
-//        Empleado empleadoJean = new Empleado("Jean", 440.00D);
-//        empleadoJean.consultarSueldo();
-//
-//        Empleado empleadoJean2 = new Medico("Pediatria");
-//        empleadoJean2.getSalario();
-//
-//        System.out.println("Objeto generado de la clase : " + empleadoJean.getClass());
-//        System.out.println("Objeto generado de la clase : " + empleadoJean2.getClass());
-//
-//        Empleado Juan = new Empleado();
-//        Juan.setNombre("Juan");
-//
-//        Medico medico1 = new Medico("Maria", 500.5D, "Medico General");
-//
-//        medico1.toString();
-//
-//        Empleado secre = new Secretaria("Ana", 1000.5D);
-//        System.out.println("Por favor Secretaria realizar : ");
-//        System.out.println("Nombre : " + secre.getNombre() + "\nSalario es : " + secre.getSalario());
-//
-//        Empleado[] listaEmpleado = new Empleado[4];
-//        listaEmpleado[0] = empleado1;
-//        listaEmpleado[1] = secre;
-//        listaEmpleado[2] = empleadoJean;
-//        listaEmpleado[3] = empleadoJean2;
-//
-//        for (int i = 0; i < listaEmpleado.length; i++) {
-//            System.out.println("Empleado [" + i + "]" + listaEmpleado[i].getNombre());
-//        }
-//
-//        for (Empleado empleado : listaEmpleado) {
-//            System.out.println("Empleado en la lista : " + empleado.getNombre());
-//
-//        }
-//
-//        for (Empleado empleado : listaEmpleado) {
-//            System.out.println("Empleado en la lista : " + empleado.getNombre()+""
-//                    + "         \nSalario : "+empleado.getSalario());        }
-//
-//    
-//        ArrayList<Empleado> listaEmpleadosGenerica = new ArrayList<>();
-//        
-//        listaEmpleadosGenerica.add(empleado1);
-//        listaEmpleadosGenerica.add(empleadoJean2);
-//        listaEmpleadosGenerica.add(secre);
-//        listaEmpleadosGenerica.add(Juan);
-//        listaEmpleadosGenerica.add(secre);
-//        
-//        listaEmpleadosGenerica.forEach(val->System.out.println("\n"+val.getSalario() + val.getNombre()));
-//        
-////        for(Empleado empleados : listaEmpleadosGenerica){
-////            System.out.println("Ver lista mediante Notacion Lamda : ");
-////            listaEmpleadosGenerica.forEach(empleado->System.out.println(empleados.getNombre()));
-////        }
-//
-//        listaEmpleadosGenerica.add(5, secre);
-//
-//        System.out.println("Reporte de Empleados en el Sistema Medico Universitario");
-//        
-//        for (Empleado empleado : listaEmpleadosGenerica) {
-//            //System.out.println("Empleado en listado listaEmpleadosGenerica : "+empleado.getNombre());
-//            System.out.println("Empleado : "+empleado.getNombre()+ " su Salario es : "+empleado.getSalario());
-//        }
-//        
+        iniciarSistemaMedico();
+    }
 
-//        for(Empleado empleados : listaEmpleadosGenerica){
-//            listaEmpleadosGenerica.add(secre);
-//        }
+    public static void iniciarSistemaMedico() {
+        //Deber
+        System.out.println("\n\nSISTEMA MEDICO UNIVERSITARIO DE LA UNIVERSIDAD NACIONAL DE LOJA");
 
-//Clase
-//          Scanner scanner = new Scanner(System.in);
-//          Medico medico = new Medico("Dr Pablo",10, "Pediatra", 500);
-//          Conductor conductor = new Conductor("Marco", 10, 500, "D");
-//          double sueldoMedico = medico.consultarSueldoExtra(10);
-//          double sueldoConductor = conductor.consultarSueldoExtra(10);
-//          System.out.println("");
-//          System.out.println(sueldoMedico);
-//          System.out.println(sueldoConductor);
-//          
-//          Empleado empleado = new Empleado() {
-//              @Override
-//              public double consultarSueldoExtra(int numeroHoras) throws AbstractMethodError {
-//                  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//              }
-//          };
-//          
-//          System.out.println(empleado.getNombre()+ empleado.getHorasDiarias());
-//                 
-//Fin Clase
-          
-//Deber
+        ArrayList<Empleado> listaEmpleados = new ArrayList<Empleado>();
+
         Scanner scanner = new Scanner(System.in);
-        System.out.println("SISTEMA MEDICO UNIVERSITARIO DE LA UNIVERSIDAD NACIONAL DE LOJA");
 
-        ArrayList<Empleado> listaEmple = new ArrayList<Empleado>();
+        //BEGGIN CREATIONS OBJECTS
+        Empleado empleado = new Empleado();
+        Medico medico = new Medico();
+        Enfermera enfermera = new Enfermera();
+        Secretaria secretaria = new Secretaria();
+        Conductor conductor = new Conductor();
+        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+        //END CREATIONS OBJECT
 
-        int opcionMenu = 1;
+        boolean verificarEntradaDatos = false;
+
+        String nombreEmpleado, tipoSeguroSocial, especialidadMedico;
+        int horasDiariasEmpleado = 0, opcionSeguro = 0, opcionEmpleado = 0, i = 0, opcionMenu = 1;
+        double salarioEmpleado = 0;
+        char licenciaEmpleado;
+
         do {
             menuOpcion();
             opcionMenu = scanner.nextInt();
 
             switch (opcionMenu) {
                 case 1 -> {
-                    System.out.println("CREACION DE NUEVO EMPLEADO");
-                    System.out.println("Ingrese nombre : ");
-                    var nombre = scanner.next();
-                    System.out.println("Ingrese numero de horas diarias : ");
-                    var horasDiarias = scanner.nextInt();
-                    System.out.println("Salario basico : ");
-                    var salarioBasico = scanner.nextDouble();
-                    Empleado empleado = new Empleado(nombre, horasDiarias, salarioBasico);
-                    listaEmple.add(empleado);
+                    System.out.println("\nELIJA EL EMPLEADO QUE DESEA CREAR");
+                    opcionEmpleado();
+                    opcionEmpleado = scanner.nextInt();
+
+                    switch (opcionEmpleado) {
+                        case 1 -> {
+                            System.out.print("\nNOMBRE EMPLEADO(A) : ");
+                            nombreEmpleado = scanner.next();
+                            System.out.print("ESPECIALIDAD MEDICO(A) : ");
+                            especialidadMedico = scanner.next();
+                            System.out.print("HORAS DIARIAS DE TRABAJO : ");
+                            horasDiariasEmpleado = scanner.nextInt();
+                            System.out.print("SALARIO EMPLEADO(A) TOTAL : ");
+                            salarioEmpleado = scanner.nextDouble();
+                            System.out.print("EL EMPLEADO DISPONE DE SEGURO MEDICO 1(SI) O 2(NO) : ");
+                            opcionSeguro = Integer.parseInt(scanner.next());
+
+                            if (opcionSeguro == 1) {
+                                System.out.print("INGRESE EL TIPO DE SEGURO : ");
+                                tipoSeguroSocial = scanner.next();
+                                medico = new Medico(especialidadMedico, nombreEmpleado, horasDiariasEmpleado, gregorianCalendar, salarioEmpleado, tipoSeguroSocial);
+                                listaEmpleados.add(medico);
+                            } else {
+                                medico = new Medico(especialidadMedico, nombreEmpleado, horasDiariasEmpleado, gregorianCalendar, salarioEmpleado);
+                                listaEmpleados.add(medico);
+                            }
+                        }
+
+                        case 2 -> {
+                            System.out.print("\nNOMBRE EMPLEADO(A) : ");
+                            nombreEmpleado = scanner.next();
+                            System.out.print("HORAS DIARIAS DE TRABAJO : ");
+                            horasDiariasEmpleado = scanner.nextInt();
+                            System.out.print("SALARIO EMPLEADO(A) TOTAL : ");
+                            salarioEmpleado = scanner.nextDouble();
+                            System.out.print("EL EMPLEADO DISPONE DE SEGURO MEDICO 1(SI) O 2(NO) : ");
+                            opcionSeguro = Integer.parseInt(scanner.next());
+
+                            if (opcionSeguro == 1) {
+                                System.out.print("INGRESE EL TIPO DE SEGURO : ");
+                                tipoSeguroSocial = scanner.next();
+                                enfermera = new Enfermera(nombreEmpleado, horasDiariasEmpleado, gregorianCalendar, salarioEmpleado, tipoSeguroSocial);
+                                listaEmpleados.add(enfermera);
+                            } else {
+                                enfermera = new Enfermera(nombreEmpleado, horasDiariasEmpleado, gregorianCalendar, salarioEmpleado);
+                                listaEmpleados.add(enfermera);
+                            }
+                        }
+                        case 3 -> {
+                            System.out.print("\nNOMBRE EMPLEADO(A) : ");
+                            nombreEmpleado = scanner.next();
+                            System.out.print("HORAS DIARIAS DE TRABAJO : ");
+                            horasDiariasEmpleado = scanner.nextInt();
+                            System.out.print("TIPO DE LICENCIA : ");
+                            licenciaEmpleado = scanner.next().charAt(0);
+                            System.out.print("SALARIO EMPLEADO(A) TOTAL : ");
+                            salarioEmpleado = scanner.nextDouble();
+                            System.out.print("EL EMPLEADO DISPONE DE SEGURO MEDICO 1(SI) O 2(NO) : ");
+                            opcionSeguro = Integer.parseInt(scanner.next());
+
+                            if (opcionSeguro == 1) {
+                                System.out.print("INGRESE EL TIPO DE SEGURO : ");
+                                tipoSeguroSocial = scanner.next();
+                                conductor = new Conductor(licenciaEmpleado, nombreEmpleado, horasDiariasEmpleado, gregorianCalendar, salarioEmpleado, tipoSeguroSocial);
+                                listaEmpleados.add(conductor);
+                            } else {
+                                conductor = new Conductor(licenciaEmpleado, nombreEmpleado, horasDiariasEmpleado, gregorianCalendar, salarioEmpleado);
+                                listaEmpleados.add(conductor);
+                            }
+                        }
+                        case 4 -> {
+                            System.out.print("\nNOMBRE EMPLEADO(A) : ");
+                            nombreEmpleado = scanner.next();
+                            System.out.print("HORAS DIARIAS DE TRABAJO : ");
+                            horasDiariasEmpleado = scanner.nextInt();
+                            System.out.print("SALARIO EMPLEADO(A) TOTAL : ");
+                            salarioEmpleado = scanner.nextDouble();
+                            System.out.print("EL EMPLEADO DISPONE DE SEGURO MEDICO 1(SI) O 2(NO) : ");
+                            opcionSeguro = Integer.parseInt(scanner.next());
+
+                            if (opcionSeguro == 1) {
+                                System.out.print("INGRESE EL TIPO DE SEGURO : ");
+                                tipoSeguroSocial = scanner.next();
+                                secretaria = new Secretaria(nombreEmpleado, horasDiariasEmpleado, gregorianCalendar, salarioEmpleado, tipoSeguroSocial);
+                                listaEmpleados.add(secretaria);
+                            } else {
+                                secretaria = new Secretaria(nombreEmpleado, horasDiariasEmpleado, gregorianCalendar, salarioEmpleado);
+                                listaEmpleados.add(secretaria);
+                            }
+                        }
+                    }
+                    verificarEntradaDatos = true;
                 }
+
                 case 2 -> {
-                    System.out.println("MOSTRAR EL LISTADO DE EMPLEADO");
-                    for (Empleado emplea : listaEmple) {
-                        System.out.println("Empleado : " + emplea.getNombre() + " tiene un salario de : " + emplea.getSalario()
-                                + " y trabaja : " + emplea.getHorasDiarias() + " horas diariamente");
+                    if (verificarEntradaDatos) {
+                        i = 0;
+                        System.out.println("\nMOSTRAR EL LISTADO DE EMPLEADO");
+                        for (Empleado empleados : listaEmpleados) {
+                            System.out.println("");
+                            if (empleados.getTipoSeguroSocial() == null) {
+                                System.out.println("EMPLEADO SIN SEGURO MEDICO");
+                                System.out.println(empleados.toString(empleados, i));
+                            } else {
+                                System.out.println("EMPLEADO CON SEGURO MEDICO");
+                                System.out.println(empleados.toString(i, empleados));
+                            }                            
+                            i++;
+                        }
+                    } else {
+                        System.out.println("\n\nAUN NO HA CREADO NINGUN EMPLEADO!!!!");
                     }
                 }
                 case 3 -> {
-                    System.out.println("ELIMINAR EMPLEADO");
-                    Empleado empleado;
-                    listaEmple.remove(empleado);
+                    if (verificarEntradaDatos) {
+                        System.out.println("\nELIMINAR EMPLEADO");
+                        i = 0;
+
+                        for (Empleado empleados : listaEmpleados) {
+                            System.out.println("");
+                            if (empleados.getTipoSeguroSocial() == null) {
+                                System.out.println("EMPLEADO SIN SEGURO MEDICO");
+                                System.out.println(empleados.toString(empleados, i));
+                            } else {
+                                System.out.println("EMPLEADO CON SEGURO MEDICO");
+                                System.out.println(empleados.toString(i, empleados));
+                            }
+                            i++;
+                        }
+
+                        int eliminarEmpleado = 0, indiceEliminar = 0;
+                        boolean bandera = false;
+
+                        do {
+                            bandera = false;
+                            System.out.print("\nDIGITE EL INDICE DEL EMPLEADO A ELIMINAR : ");
+                            indiceEliminar = scanner.nextInt();
+                            listaEmpleados.remove(indiceEliminar);
+                            i = 0;
+                            for (Empleado empleados : listaEmpleados) {
+                                System.out.println("");
+                                if (empleados.getTipoSeguroSocial() == null) {
+                                    System.out.println("EMPLEADO SIN SEGURO MEDICO");
+                                    System.out.println(empleados.toString(empleados, i));
+                                } else {
+                                    System.out.println("EMPLEADO CON SEGURO MEDICO");
+                                    System.out.println(empleados.toString(i, empleados));
+                                }
+                                i++;
+                            }
+                            System.out.print("¿DESEA SEGUIR ELIMINANDO EMPLEADOS? 1(SI) O 2(NO) : ");
+                            eliminarEmpleado = Integer.parseInt(scanner.next());
+                            if (eliminarEmpleado == 1) {
+                                bandera = true;
+                            }
+                        } while (bandera);
+                        i = 0;
+                        System.out.println("\n\nNUEVA LISTA");
+                        for (Empleado empleados : listaEmpleados) {
+                            System.out.println("");
+                            if (empleados.getTipoSeguroSocial() == null) {
+                                System.out.println("EMPLEADO SIN SEGURO MEDICO");
+                                System.out.println(empleados.toString(empleados, i));
+                            } else {
+                                System.out.println("EMPLEADO CON SEGURO MEDICO");
+                                System.out.println(empleados.toString(i, empleados));
+                            }
+                            i++;
+                        }
+                    } else {
+                        System.out.println("\n\nAUN NO HA CREADO NINGUN EMPLEADO!!!!");
+                    }
                 }
-                case 4 -> System.out.println("CREAR UNA FACTURA");
-                default -> System.out.println("OPCION NO VALIDA");
+                case 4 -> {
+                    System.out.println("\nCREAR UNA FACTURA");
+                    secretaria.generarFactura();
+                }
+                case 5 -> {
+                    if (verificarEntradaDatos) {
+                        System.out.println("\nINGRESAR SALARIO EXTRA");
+                        double horasExtra = 0;
+                        for (Empleado empleados : listaEmpleados) {
+                            System.out.println("EMPLEADO CLASE : "+empleados.getClass());
+                            System.out.print("HORAS EXTRA DEL EMPLEADO " + empleados.getNombre() + " : ");
+                            horasExtra = scanner.nextDouble();
+                            empleados.setHorasExtra(horasExtra);
+                        }
+                        System.out.println("\nSUELDOS EXTRA");
+                        for (Empleado empleados : listaEmpleados) {
+                            System.out.println("");
+                            empleados.sueldoExtraEmpleado(empleados);
+                        }
+                    } else {
+                        System.out.println("\n\nAUN NO HA CREADO NINGUN EMPLEADO!!!!");
+                    }
+                }
+                case 6 -> {
+                    if (verificarEntradaDatos) {
+                        double sumaSueldosEmpleados = 0;
+                        System.out.println("\nSUMATORIA EMPLEADOS SUELDOS");
+                        for (Empleado empleados : listaEmpleados) {
+                            sumaSueldosEmpleados = sumaSueldosEmpleados + empleados.getSalario();
+                        }
+                        System.out.println("\nLA SUMATORIA DE LOS SUELDOS DE LOS EMPLEADOS ES IGUAL A : " + sumaSueldosEmpleados);
+                    } else {
+                        System.out.println("\n\nAUN NO HA CREADO NINGUN EMPLEADO!!!!");
+                    }
+                }
             }
 
-        } while (opcionMenu <= 4);
-
-//        Empleado Juan = new Empleado("Juan", 8, 400D);
-//        Medico medico = new Medico("Dr Pedro", 12, "Pediatra", 600D);
-//        Secretaria secretaria = new Secretaria("Maria", 6, 450D);
-//        Conductor conductor = new Conductor("Conductor Luis", 6, 440, "Licencia D");
-
-        double calcularSueldoAdicional = 0;
-        //Juan.consultarSueldo();
-        double sueldoTotal = 0;
-        
-        
-   //Fin deber
-//        calcularSueldoAdicional = Juan.consultarSueldoExtra(10);
-//            sueldoTotal = Juan.getSalario() + calcularSueldoAdicional;
-//            
-
-//        System.out.println("Sueldo Total : " + sueldoTotal);
-//
-//        ArrayList<Empleado> listaEmpleado = new ArrayList<Empleado>();
-//
-//        listaEmpleado.add(Juan);
-//        listaEmpleado.add(medico);
-//        listaEmpleado.add(secretaria);
-//        listaEmpleado.add(conductor);
-//
-//        System.out.println("\nSueldo Basicos");
-//        for (Empleado empleado : listaEmpleado) {
-//            System.out.println("Empleado : " + empleado.getNombre() + " tiene un salario de : " + empleado.getSalario()
-//                    + " y trabaja : " + empleado.getHorasDiarias() + " horas diariamente");
-//        }
-//        System.out.println("Fin sueldo basico\n");
-//
-//        System.out.println("Calculo Sueldo Extra");
-//        for (Empleado empleado : listaEmpleado) {
-//            calcularSueldoAdicional = empleado.consultarSueldoExtra(10);
-//            sueldoTotal = Juan.getSalario() + calcularSueldoAdicional;
-//            empleado.setSalario(sueldoTotal);
-//            System.out.println("Su sueldo extra es : " + empleado.getSalario());
-//        }
-//
-//        System.out.println("Fin sueldo Extras\n");
-//
-//        System.out.println("\nSueldos Totales");
-//        for (Empleado empleado : listaEmpleado) {
-//            System.out.println("Empleado : " + empleado.getNombre() + " tiene un salario de : " + empleado.getSalario()
-//                    + " y trabaja : " + empleado.getHorasDiarias() + " horas diariamente");
-//        }
-//        System.out.println("Fin sueldo total\n");
-//
-//        double sueldoTotalEmpleados = 0;
-//        for (Empleado empleado : listaEmpleado) {
-//            sueldoTotalEmpleados += empleado.getSalario();
-//        }
-//        System.out.println(" El sueldo Total Empleados = " + sueldoTotalEmpleados);
-
+        } while (opcionMenu <= 6);
+        mensajeFinal();
     }
 
     public static void menuOpcion() {
-        System.out.println("1. CREAR UN NUEVO EMPLEADO");
-        System.out.println("2. MOSTRAR EL LISTADO DE EMPLEADOS");
+        System.out.println("\n\n1. CREAR UN NUEVO EMPLEADO");
+        System.out.println("2. MOSTRAR EL LISTADO DE EMPLEADOS CREADOS");
         System.out.println("3. ELIMINAR EMPLEADO");
         System.out.println("4. CREAR UNA FACTURA");
-        System.out.println("5. SALIR");
+        System.out.println("5. CONSULTAR SALARIO EXTRA");
+        System.out.println("6. SUMATORIA SUELDOS EMPLEADOS");
+        System.out.println("7. SALIR");
+        System.out.print("OPCION : ");
+    }
+
+    public static void opcionEmpleado() {
+        System.out.println("\n1. MEDICO(A)");
+        System.out.println("2. ENFERMERO(A)");
+        System.out.println("3. CONDUCTOR(A)");
+        System.out.println("4. SECRETARIO(A)");
+        System.out.print("OPCION : ");
+    }
+
+    public static void mensajeFinal() {
+        System.out.println("\nGracias Por Usar el Programa!!!");
+        System.out.println("Algoritmo Realizado por :  Josue Sauca");
+        System.out.println("Segundo Ciclo Paralelo 'B' ");
+        System.out.println("Vuelva Pronto!!!");
 
     }
 
